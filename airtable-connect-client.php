@@ -48,7 +48,7 @@ function Airtable_Connect_Client_autoload_classes( $class_name ) {
 	$filename = strtolower( str_replace( '_', '-', substr( $class_name, strlen( 'ATC_' ) ) ) );
 
 	// Include our file.
-	Airtable_Connect_Client::include__file( 'includes/class-' . $filename );
+	Airtable_Connect_Client::include_file( 'includes/class-' . $filename );
 }
 spl_autoload_register( 'Airtable_Connect_Client_autoload_classes' );
 
@@ -100,6 +100,14 @@ final class Airtable_Connect_Client {
 	protected $activation_errors = [];
 
 	/**
+	 * Plugin settings.
+	 *
+	 * @var ATC_Settings
+	 * @since 0.1.0
+	 */
+	protected $settings = null;
+
+	/**
 	 * Singleton instance of plugin.
 	 *
 	 * @var Airtable_Connect_Client
@@ -130,6 +138,15 @@ final class Airtable_Connect_Client {
 		$this->basename = plugin_basename( __FILE__ );
 		$this->url      = plugin_dir_url( __FILE__ );
 		$this->path     = plugin_dir_path( __FILE__ );
+	}
+
+	/**
+	 * Attach other plugin classes to the base plugin class.
+	 *
+	 * @since 0.1.0
+	 */
+	public function plugin_classes() {
+		$this->settings = new ATC_Settings( $this );
 	}
 
 	/**
