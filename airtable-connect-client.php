@@ -116,6 +116,14 @@ final class Airtable_Connect_Client {
 	protected $auth = null;
 
 	/**
+	 * Connection object.
+	 *
+	 * @var ATC_Connect
+	 * @since 0.1.0
+	 */
+	protected $connect = null;
+
+	/**
 	 * Singleton instance of plugin.
 	 *
 	 * @var Airtable_Connect_Client
@@ -156,6 +164,7 @@ final class Airtable_Connect_Client {
 	public function plugin_classes() {
 		$this->settings = new ATC_Settings( $this );
 		$this->auth     = new ATC_Authorization( $this );
+		$this->connect  = new ATC_Connect( $this );
 	}
 
 	/**
@@ -169,6 +178,19 @@ final class Airtable_Connect_Client {
 	 */
 	public function hooks() {
 		add_action( 'init', [ $this, 'init' ], 0 );
+	}
+
+	/**
+	 * Pass a constructed query to the connection object and run it
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param ATC_Query $query The constructed query object
+	 * @param string $http_method The http method of for the request
+	 * @return mixed The result of the request or false if the request fails
+	 */
+	public function run_query( $query, $http_method ) {
+		return $this->connect->run_query( $query, $http_method );
 	}
 
 	/**

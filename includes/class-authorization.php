@@ -46,6 +46,14 @@ class ATC_Authorization {
 	private $redirect_path = 'airtableconnect/auth';
 
 	/**
+	 * Redirect URI that processes the auth token request
+	 *
+	 * @var string
+	 * @since 0.1.0
+	 */
+	private $redirect_uri = '';
+
+	/**
 	 * Constructor
 	 *
 	 * @param Airtable_Connect_Client $plugin The parent plugin
