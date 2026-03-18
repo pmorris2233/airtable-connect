@@ -1,14 +1,14 @@
 <?php
 /**
- * Plugin Name: Tablepress - An Airtable REST API Client
+ * Plugin Name: Airtable Connect - An Airtable REST API Client
  * Description: An Airtable REST API client that uses OAuth for authentication
  * Version: 0.1.0
  * Author: Paul Morris
  * License: GPLv2
- * Text Domain: tablepress
+ * Text Domain: airtable-connect
  * Domain Path: /languages
  *
- * @package Tablepress_Airtable_Client
+ * @package Airtable_Connect_Client
  * @version 0.1.0
  *
  */
@@ -37,10 +37,10 @@
  * @since  0.1.0
  * @param  string $class_name Name of the class being requested.
  */
-function Tablepress_Airtable_Client_autoload_classes( $class_name ) {
+function Airtable_Connect_Client_autoload_classes( $class_name ) {
 
 	// If our class doesn't have our prefix, don't load it
-	if ( 0 !== strpos( $class_name, 'TPAC_' ) ) {
+	if ( 0 !== strpos( $class_name, 'ATC_' ) ) {
 		return;
 	}
 
@@ -48,16 +48,16 @@ function Tablepress_Airtable_Client_autoload_classes( $class_name ) {
 	$filename = strtolower( str_replace( '_', '-', substr( $class_name, strlen( 'TPAC_' ) ) ) );
 
 	// Include our file.
-	Tablepress_Airtable_Client::include__file( 'includes/class-' . $filename );
+	Airtable_Connect_Client::include__file( 'includes/class-' . $filename );
 }
-spl_autoload_register( 'Tablepress_Airtable_Client_autoload_classes' );
+spl_autoload_register( 'Airtable_Connect_Client_autoload_classes' );
 
 /**
  * Main initiation class.
  *
  * @since 0.1.0
  */
-final class Tablepress_Airtable_Client {
+final class Airtable_Connect_Client {
 
 	/**
 	 * Current version.
@@ -102,7 +102,7 @@ final class Tablepress_Airtable_Client {
 	/**
 	 * Singleton instance of plugin.
 	 *
-	 * @var Tablepress_Airtable_Client
+	 * @var Airtable_Connect_Client
 	 * @since 0.1.0
 	 */
 	protected static $single_instance = null;
@@ -111,7 +111,7 @@ final class Tablepress_Airtable_Client {
 	 * Creates or returns an instance of this class.
 	 *
 	 * @since 0.1.0
-	 * @return Tablepress_Airtable_Client A single instance of this class.
+	 * @return Airtable_Connect_Client A single instance of this class.
 	 */
 	public static function get_instance() {
 		if ( null === self::$single_instance ) {
@@ -185,7 +185,7 @@ final class Tablepress_Airtable_Client {
 		}
 
 		// Load translated strings for plugin
-		load_plugin_textdomain( 'tablepress', false, dirname( $this->basename ) . '/languages/' );
+		load_plugin_textdomain( 'airtable-connect', false, dirname( $this->basename ) . '/languages/' );
 
 		// Initialize plugin classes.
 		$this->plugin_classes();
@@ -252,7 +252,7 @@ final class Tablepress_Airtable_Client {
 	public function requirements_not_met_notice() {
 
 		// Compile default message.
-		$default_message = sprintf( __( 'Tablepress - Airtable Developer Client is missing requirements and has been <a href="%s">deactivated</a>Please make sure all requirements are available.', 'tablepress' ), admin_url('plugins.php') );
+		$default_message = sprintf( __( 'Airtable Connect - Airtable Developer Client is missing requirements and has been <a href="%s">deactivated</a>Please make sure all requirements are available.', 'airtable-connect' ), admin_url('plugins.php') );
 
 		// Default details to null.
 		$details = null;
@@ -340,19 +340,19 @@ final class Tablepress_Airtable_Client {
 }
 
 /**
- * Grab the Tablepress_Airtable_Client object and return it.
- * Wrapper for Tablepress_Airtable_Client::get_instance().
+ * Grab the Airtable_Connect_Client object and return it.
+ * Wrapper for Airtable_Connect_Client::get_instance().
  *
  * @since 0.1.0
- * @return Tablepress_Airtable_Client Singleton instance of plugin class.
+ * @return Airtable_Connect_Client Singleton instance of plugin class.
  */
-function Tablepress() {
-	return Tablepress_Airtable_Client::get_instance();
+function Airtable_Connect() {
+	return Airtable_Connect_Client::get_instance();
 }
 
 // Kick it off.
-add_action( 'plugins_loaded', [ Tablepress(), 'hooks' ] );
+add_action( 'plugins_loaded', [ Airtable_Connect(), 'hooks' ] );
 
 // Activation and deactivation
-register_activation_hook( __FILE__, [ Tablepress(), '_activate' ] );
-register_deactivation_hook( __FILE__, [ Tablepress(), '_deactivate' ] );
+register_activation_hook( __FILE__, [ Airtable_Connect(), '_activate' ] );
+register_deactivation_hook( __FILE__, [ Airtable_Connect(), '_deactivate' ] );
