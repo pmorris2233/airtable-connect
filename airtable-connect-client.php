@@ -404,3 +404,15 @@ add_action( 'plugins_loaded', [ Airtable_Connect(), 'hooks' ] );
 // Activation and deactivation
 register_activation_hook( __FILE__, [ Airtable_Connect(), '_activate' ] );
 register_deactivation_hook( __FILE__, [ Airtable_Connect(), '_deactivate' ] );
+
+/**
+ * Wrapper function for creating queries
+ *
+ * @since 0.1.0
+ *
+ * @param array $options An array of options to configure the query
+ * @return ATC_Query A query object
+ */
+function Airtable_Connect_Query( $options ) {
+	return new ATC_Query( $options );
+}

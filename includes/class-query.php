@@ -53,17 +53,23 @@ class ATC_Query {
 	private $related_queries = [];
 
 	/**
+	 * Default query options
+	 *
+	 * @var array
+	 * @since 0.1.0
+	 */
+	private $defaults = [
+		'airtable_url' => 'https://api.airtable.com/v0',
+		'view'         => null
+	];
+
+	/**
 	 * Constructor
 	 *
 	 * @param array $options An array of options to configure the query
 	 * @since 0.1.0
 	 */
 	public function __construct( $options ) {
-		$this->defaults = [
-			'airtable_url' => 'https://api.airtable.com/v0',
-			'view'         => null
-		];
-
 		$this->set_config( $options );
 	}
 
