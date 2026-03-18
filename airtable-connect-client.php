@@ -108,6 +108,14 @@ final class Airtable_Connect_Client {
 	protected $settings = null;
 
 	/**
+	 * Authorization object.
+	 *
+	 * @var ATC_Authorization
+	 * @since 0.1.0
+	 */
+	protected $auth = null;
+
+	/**
 	 * Singleton instance of plugin.
 	 *
 	 * @var Airtable_Connect_Client
@@ -147,6 +155,7 @@ final class Airtable_Connect_Client {
 	 */
 	public function plugin_classes() {
 		$this->settings = new ATC_Settings( $this );
+		$this->auth     = new ATC_Authorization( $this );
 	}
 
 	/**
