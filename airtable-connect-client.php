@@ -45,7 +45,7 @@ function Airtable_Connect_Client_autoload_classes( $class_name ) {
 	}
 
 	// Set up our filename.
-	$filename = strtolower( str_replace( '_', '-', substr( $class_name, strlen( 'TPAC_' ) ) ) );
+	$filename = strtolower( str_replace( '_', '-', substr( $class_name, strlen( 'ATC_' ) ) ) );
 
 	// Include our file.
 	Airtable_Connect_Client::include__file( 'includes/class-' . $filename );
